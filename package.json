@@ -1,0 +1,11 @@
+{
+  "name": "dnd-pdf-parsing",
+  "version": "1.0.0",
+  "description": "parse your pdfs of dnd monster content for simple json output",
+  "main": "index.js",
+  "author": "Sebastian Vaughan",
+  "license": "MIT",
+  "dependencies": {
+    "pdf2json": "^1.2.0"
+  }
+}
