@@ -5,7 +5,21 @@
   "main": "index.js",
   "author": "Sebastian Vaughan",
   "license": "MIT",
+  "scripts": {
+    "test": "node src/test.js",
+    "convertpdf": "node src/parse-pdf.js creature-codex-5e.pdf",
+    "parsecodices": "node src/parse-codices.js"
+  },
   "dependencies": {
     "pdf2json": "^1.2.0"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.0",
+    "eslint": "^7.17.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-vue": "^7.4.1",
+    "inquirer": "^7.3.3",
+    "prettier": "^2.2.1"
   }
 }
