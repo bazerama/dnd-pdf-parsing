@@ -1,10 +1,10 @@
-const fs = require('fs')
-const path = require('path')
-const inquirer = require('inquirer')
+const fs = require('fs');
+const path = require('path');
+const inquirer = require('inquirer');
 // const chalk = require('chalk');
-const consts = require('./common/consts')
+const consts = require('./common/consts');
 
-const date = new Date().toLocaleString('en-AU');
+const date = new Date(Date.now());
 const isoDate = new Date(date).toISOString();
 
 const files = fs.readdirSync(path.join(__dirname, '..', 'resources/json'))
@@ -25,7 +25,7 @@ const loadFile = (fileName) => {
 
     console.dir(easyArray)
     easyArray.forEach((text, textsIndex) => {
-        if (textsIndex < 1000) {
+        if (textsIndex < 1600) {
             consts.codices.forEach((codex, codicesIndex) => {
                 if (text === codex) {
                     console.log('equal:', "'" + text + "'", "'" + codex + "'")
@@ -47,17 +47,26 @@ const loadFile = (fileName) => {
                             creature: easyArray[i],
                             page: easyArray[i + 2],
                         }
+                        let j = "";
                         if (
                             easyArray[i + 3].toString().charAt(0) === '–'
                         ) {
+                            if (
+                                easyArray[i + 3].toString() === '–'
+                            ) {
+                                j = easyArray[i + 3].toString();
+                                i += 1;
+                            }
                             console.log('page of: ' + codexObject.page)
                             console.log(
                                 'dashed field: ' +
+                                j +
                                 easyArray[i + 3] +
                                     '\n'
                             )
                             if (/([0-9]|\-)+/g.test(easyArray[i + 3])) {
                                 codexObject.page = codexObject.page.concat(
+                                    j,
                                     easyArray[i + 3]
                                 )
                                 incrementalObjectIndices += 1
@@ -77,14 +86,11 @@ const loadFile = (fileName) => {
             })
         }
     })
+    console.dir(codicesObjects)
 
     fs.writeFile(
-        path.join(
-            __dirname,
-            '..',
-            `/resources/json/${isoDate}-easycodices.json`
-        ),
-        codicesObjects,
+        path.join(__dirname, '..', `/resources/json/${isoDate}-easycodices.json` ),
+        JSON.stringify(codicesObjects),
         () => {
             console.dir(codicesObjects)
         }

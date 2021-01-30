@@ -11,8 +11,8 @@ pdfParser.on('pdfParser_dataError', (errData) => {
 });
 
 pdfParser.on('pdfParser_dataReady', (pdfData) => {
-    const date = new Date().toLocaleString('en-AU');
-    const isoDate = new Date(parseInt(date)).toISOString();
+    const date = new Date(Date.now());
+    const isoDate = new Date(date).toISOString();
 
     console.log('Parsed PDF Data');
 
