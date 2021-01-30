@@ -4,8 +4,8 @@ const inquirer = require('inquirer')
 // const chalk = require('chalk');
 const consts = require('./common/consts')
 
-const date = new Date().toLocaleString('en-AU');
-const isoDate = new Date(date).toISOString();
+const date = new Date().toLocaleString('en-AU')
+const isoDate = new Date(date).toISOString()
 
 const files = fs.readdirSync(path.join(__dirname, '..', 'resources/json'))
 
@@ -19,44 +19,48 @@ const questions = [
 ]
 
 const loadFile = (fileName) => {
+    const BreakException = {}
+    let finishCodices = false
     const codicesObjects = []
     const fileContent = fs.readFileSync(fileName)
     const easyArray = JSON.parse(fileContent)
 
-    console.dir(easyArray)
-    easyArray.forEach((text, textsIndex) => {
-        if (textsIndex < 1000) {
+    // console.dir(easyArray)
+    try {
+        easyArray.forEach((text, textsIndex) => {
+            // if (easyArray[textsIndex + 1] === consts.codicesBreakPoint) {
+            //     finishCodices = true
+            //     console.log(`finishing at ${easyArray[textsIndex + 1]}`)
+            // }
             consts.codices.forEach((codex, codicesIndex) => {
                 if (text === codex) {
-                    console.log('equal:', "'" + text + "'", "'" + codex + "'")
+                    // console.log('equal:', "'" + text + "'", "'" + codex + "'")
                     let i = textsIndex + 1
-                    console.log('i =', i)
-                    console.log(`easyArray[${i}] = ${easyArray[i]}`)
-                    let k = 0
+                    // console.log('i =', i)
+                    // console.log(`easyArray[${i}] = ${easyArray[i]}`)
                     while (
-                        easyArray[i] !== consts.codices[codicesIndex + 1] &&
-                        k < 20
+                        easyArray[i] !== consts.codices[codicesIndex + 1]
                     ) {
-                        k += 1
-                        console.log('current: ' + easyArray[i])
-                        console.log(
-                            'potential next page num char: ' + easyArray[i + 3].toString().charAt(0)
-                        )
+                        if (finishCodices) {
+                            throw BreakException
+                        }
+                        // console.log('current: ' + easyArray[i])
+                        // console.log(
+                        //     'potential next page num char: ' +
+                        //         easyArray[i + 3].toString().charAt(0)
+                        // )
                         let incrementalObjectIndices = 3
                         const codexObject = {
                             creature: easyArray[i],
                             page: easyArray[i + 2],
                         }
-                        if (
-                            easyArray[i + 3].toString().charAt(0) === '–'
-                        ) {
-                            console.log('page of: ' + codexObject.page)
-                            console.log(
-                                'dashed field: ' +
-                                easyArray[i + 3] +
-                                    '\n'
-                            )
+                        if (codexObject.creature === consts.codicesBreakPoint)
+                            finishCodices = true
+                        if (easyArray[i + 3].toString().charAt(0) === '–') {
+                            // console.log('page of: ' + codexObject.page)
+                            // console.log('dashed field: ' + easyArray[i + 3])
                             if (/([0-9]|\-)+/g.test(easyArray[i + 3])) {
+                                // console.log('passed first')
                                 codexObject.page = codexObject.page.concat(
                                     easyArray[i + 3]
                                 )
@@ -64,19 +68,47 @@ const loadFile = (fileName) => {
                             } else if (
                                 /([a-zA-Z]|\-)+/g.test(easyArray[i + 3])
                             ) {
+                                // console.log('passed second')
                                 codexObject.creature = codexObject.creature.concat(
                                     easyArray[i + 3]
                                 )
                                 incrementalObjectIndices += 1
+                            } else if (/^\–/g.test(easyArray[i + 3])) {
+                                // console.log('passed third')
+                                const previous = parseInt(codexObject.page)
+                                const next = parseInt(easyArray[i + 4])
+                                if (
+                                    Number.isInteger(previous) &&
+                                    Number.isInteger(next)
+                                ) {
+                                    codexObject.page = codexObject.page.concat(
+                                        easyArray[i + 3],
+                                        easyArray[i + 4]
+                                    )
+                                } else {
+                                    codexObject.creature = codexObject.creature.concat(
+                                        easyArray[i + 3],
+                                        easyArray[i + 4]
+                                    )
+                                }
+                                incrementalObjectIndices += 2
                             }
+                            // console.log('\n')
                         }
-                        codicesObjects.push(codexObject)
+                        if (codexObject.creature !== consts.emailMeta) {
+                            codicesObjects.push(codexObject)
+                        }
                         i += incrementalObjectIndices
                     }
                 }
             })
-        }
-    })
+        })
+    } catch (e) {
+        if (e !== BreakException) throw e
+        console.log(
+            `Successfully finished creating Creature Codices with ${codicesObjects.length} creatures`
+        )
+    }
 
     fs.writeFile(
         path.join(
@@ -84,9 +116,9 @@ const loadFile = (fileName) => {
             '..',
             `/resources/json/${isoDate}-easycodices.json`
         ),
-        codicesObjects,
+        JSON.stringify(codicesObjects),
         () => {
-            console.dir(codicesObjects)
+            console.dir(codicesObjects, { maxArrayLength: 4 })
         }
     )
 }
