@@ -7,3 +7,7 @@ node_modules/
 *populatedcodices.json
 *cleanedcodices.json
 *.pdf
+resources/json/1-strings_w_format.json
+resources/json/2021-02-05T00:07:04+11:00-easyappendices.json
+resources/json/2021-02-05T00:08:05+11:00-easyappendices.json
+src/parse-strings_w_format.js
