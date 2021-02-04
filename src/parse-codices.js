@@ -39,9 +39,7 @@ const loadFile = (fileName) => {
                     let i = textsIndex + 1
                     // console.log('i =', i)
                     // console.log(`easyArray[${i}] = ${easyArray[i]}`)
-                    while (
-                        easyArray[i] !== consts.codices[codicesIndex + 1]
-                    ) {
+                    while (easyArray[i] !== consts.codices[codicesIndex + 1]) {
                         if (finishCodices) {
                             throw BreakException
                         }
@@ -65,10 +63,6 @@ const loadFile = (fileName) => {
                                 j = easyArray[i + 3].toString()
                                 i += 1
                             }
-                            console.log('page of: ' + codexObject.page)
-                            console.log(
-                                'dashed field: ' + j + easyArray[i + 3] + '\n'
-                            )
                             if (/([0-9]|\-)+/g.test(easyArray[i + 3])) {
                                 // console.log('passed first')
                                 codexObject.page = codexObject.page.concat(

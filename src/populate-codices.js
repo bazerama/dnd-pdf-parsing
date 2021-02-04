@@ -60,10 +60,16 @@ const loadFile = (codicesFileName, easyArrayFileName) => {
                     addCreatureText = true
                     // console.log(`Adding text for ${codex.creature}`)
                     textIncrementer += 2 // skips next two garbage texts (meta + page num)
-                } else if (prevText === consts.emailMeta && text === consts.finalCodicesPage) {
+                } else if (
+                    prevText === consts.emailMeta &&
+                    text === consts.finalCodicesPage
+                ) {
                     // console.log(`Stopping last ${easyArray[textIncrementer]}...`)
                     creatureFinished = true
-                } else if (prevText === consts.emailMeta && text === parseInt(nextCreaturePage).toString()) {
+                } else if (
+                    prevText === consts.emailMeta &&
+                    text === parseInt(nextCreaturePage).toString()
+                ) {
                     // i.e. this text is the next creature's page, it's time to stop!!!
                     // console.log(`Stopping ${easyArray[textIncrementer]}...`)
                     creatureFinished = true

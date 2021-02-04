@@ -39,7 +39,7 @@ pdfParser.on('pdfParser_dataReady', (pdfData) => {
             })
             if (flagFutureElements === 0) {
                 counter += textArray.push(decodedText)
-            // } else if (newText === 'ameduaodnw') {
+                // } else if (newText === 'ameduaodnw') {
             } else if (newText === 'ft' || newText === 'fl') {
                 counter--
                 const lastText = textArray.pop()
@@ -50,8 +50,13 @@ pdfParser.on('pdfParser_dataReady', (pdfData) => {
                 )
                 // console.log(`adding ${fixedText}`)
                 counter += textArray.push(fixedText)
-            // } else if (newText === 'ameduaodnw') {
-            } else if (newText === 'th' || newText === 'wh' || newText === 'fi' || newText === 'ff') {
+                // } else if (newText === 'ameduaodnw') {
+            } else if (
+                newText === 'th' ||
+                newText === 'wh' ||
+                newText === 'fi' ||
+                newText === 'ff'
+            ) {
                 counter--
                 let fixedText = ''
                 const lastText = textArray.pop()

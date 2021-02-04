@@ -26,8 +26,7 @@ const teststr = '192-205'
 const test = parseInt(teststr)
 console.log(test.toString())
 
-const target = 115
-
+// const target = 115
 // setInterval(() => {
 //     process.stdout.write('\rTime remaining: ' + target + ' seconds')
 //     target--
