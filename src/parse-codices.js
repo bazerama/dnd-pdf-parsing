@@ -1,11 +1,12 @@
-const fs = require('fs');
-const path = require('path');
-const inquirer = require('inquirer');
-// const chalk = require('chalk');
-const consts = require('./common/consts');
+const fs = require('fs')
+const path = require('path')
+const inquirer = require('inquirer')
+// const chalk = require('chalk')
+const consts = require('./common/consts')
+const moment = require('moment')
 
-const date = new Date(Date.now());
-const isoDate = new Date(date).toISOString();
+const date = moment()
+const isoDate = date.format()
 
 const files = fs.readdirSync(path.join(__dirname, '..', 'resources/json'))
 
@@ -14,8 +15,8 @@ const questions = [
         type: 'list',
         name: 'FILELOCATION',
         message: 'Which JSON file should be loaded?',
-        choices: files,
-    },
+        choices: files
+    }
 ]
 
 const loadFile = (fileName) => {
@@ -40,29 +41,23 @@ const loadFile = (fileName) => {
                         k += 1
                         console.log('current: ' + easyArray[i])
                         console.log(
-                            'potential next page num char: ' + easyArray[i + 3].toString().charAt(0)
+                            'potential next page num char: ' +
+                                easyArray[i + 3].toString().charAt(0)
                         )
                         let incrementalObjectIndices = 3
                         const codexObject = {
                             creature: easyArray[i],
-                            page: easyArray[i + 2],
+                            page: easyArray[i + 2]
                         }
-                        let j = "";
-                        if (
-                            easyArray[i + 3].toString().charAt(0) === '–'
-                        ) {
-                            if (
-                                easyArray[i + 3].toString() === '–'
-                            ) {
-                                j = easyArray[i + 3].toString();
-                                i += 1;
+                        let j = ''
+                        if (easyArray[i + 3].toString().charAt(0) === '–') {
+                            if (easyArray[i + 3].toString() === '–') {
+                                j = easyArray[i + 3].toString()
+                                i += 1
                             }
                             console.log('page of: ' + codexObject.page)
                             console.log(
-                                'dashed field: ' +
-                                j +
-                                easyArray[i + 3] +
-                                    '\n'
+                                'dashed field: ' + j + easyArray[i + 3] + '\n'
                             )
                             if (/([0-9]|\-)+/g.test(easyArray[i + 3])) {
                                 codexObject.page = codexObject.page.concat(
@@ -89,7 +84,11 @@ const loadFile = (fileName) => {
     console.dir(codicesObjects)
 
     fs.writeFile(
-        path.join(__dirname, '..', `/resources/json/${isoDate}-easycodices.json` ),
+        path.join(
+            __dirname,
+            '..',
+            `/resources/json/${isoDate}-easycodices.json`
+        ),
         JSON.stringify(codicesObjects),
         () => {
             console.dir(codicesObjects)

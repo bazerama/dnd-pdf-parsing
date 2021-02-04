@@ -12,6 +12,7 @@
     "parsecodices": "node src/parse-codices.js"
   },
   "dependencies": {
+    "moment": "^2.29.1",
     "pdf2json": "^1.2.0"
   },
   "devDependencies": {
