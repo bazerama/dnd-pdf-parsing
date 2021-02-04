@@ -27,4 +27,15 @@ const codices = [
     'CODEX Z',
     'Appendix A: NPC Codex'
 ]
-module.exports.codices = codices;
+
+const sizes = {
+    Tiny: 'T',
+    Small: 'S',
+    Medium: 'M',
+    Large: 'L',
+    Huge: 'H',
+    Gargantuan: 'G'
+}
+
+module.exports.codices = codices
+module.exports.sizes = sizes

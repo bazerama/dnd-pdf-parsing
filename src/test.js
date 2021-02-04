@@ -1,13 +1,16 @@
-const date = new Date();
-const localDate = date.toLocaleString('en-AU');
-console.dir(localDate);
-const isoLocalDate = new Date(localDate).toISOString();
-// console.dir(date.getTime());
-console.dir(isoLocalDate);
+const moment = require('moment')
+const date = moment()
+console.log(`Date: ${date}`)
+// const dateval = date.valueOf()
+// console.log(`Date Val: ${dateval}`)
+// const localDate = date.toLocaleString('en-AU')
+// console.log(`Local Date: ${localDate}`)
+const isoLocalDate = date.format()
+console.log(`ISO Local Date: ${isoLocalDate}`)
 
-let target = 115;
+const target = 115
 
-setInterval(() => {
-    process.stdout.write('\rTime remaining: ' + target + ' seconds');
-    target--;
-}, 1000);
+// setInterval(() => {
+//     process.stdout.write('\rTime remaining: ' + target + ' seconds')
+//     target--
+// }, 1000)
