@@ -1,17 +1,9 @@
-const date = new Date()
-const localDate = date.toLocaleString('en-AU')
+const moment = require('moment')
 const consts = require('./common/consts')
-console.dir(localDate)
-const isoLocalDate = new Date(localDate).toISOString()
-// console.dir(date.getTime());
-console.dir(isoLocalDate)
-
-// let target = 115;
-
-// setInterval(() => {
-//     process.stdout.write('\rTime remaining: ' + target + ' seconds');
-//     target--;
-// }, 1000);
+const date = moment()
+console.log(`Date: ${date}`)
+const isoLocalDate = date.format()
+console.log(`ISO Local Date: ${isoLocalDate}`)
 
 let flagFutureElements = 0
 decodedText = 'Bearfolk Chie'
@@ -33,3 +25,10 @@ consts.brokenDecodedTextList.forEach((brokenText) => {
 const teststr = '192-205'
 const test = parseInt(teststr)
 console.log(test.toString())
+
+const target = 115
+
+// setInterval(() => {
+//     process.stdout.write('\rTime remaining: ' + target + ' seconds')
+//     target--
+// }, 1000)

@@ -6,6 +6,7 @@
   "author": "Sebastian Vaughan",
   "license": "MIT",
   "scripts": {
+    "scartest": "node src/scar_test.js",
     "test": "node src/test.js",
     "convertpdf": "node src/parse-pdf.js creature-codex-5e.pdf",
     "parsecodices": "node src/parse-codices.js",
@@ -13,6 +14,7 @@
     "cleancodices": "node src/clean-codices.js"
   },
   "dependencies": {
+    "moment": "^2.29.1",
     "pdf2json": "^1.2.0"
   },
   "devDependencies": {

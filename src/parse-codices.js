@@ -1,11 +1,12 @@
 const fs = require('fs')
 const path = require('path')
 const inquirer = require('inquirer')
-// const chalk = require('chalk');
+// const chalk = require('chalk')
 const consts = require('./common/consts')
+const moment = require('moment')
 
-const date = new Date().toLocaleString('en-AU')
-const isoDate = new Date(date).toISOString()
+const date = moment()
+const isoDate = date.format()
 
 const files = fs.readdirSync(path.join(__dirname, '..', 'resources/json'))
 
@@ -14,8 +15,8 @@ const questions = [
         type: 'list',
         name: 'FILELOCATION',
         message: 'Which JSON file should be loaded?',
-        choices: files,
-    },
+        choices: files
+    }
 ]
 
 const loadFile = (fileName) => {
@@ -52,16 +53,26 @@ const loadFile = (fileName) => {
                         let incrementalObjectIndices = 3
                         const codexObject = {
                             creature: easyArray[i],
-                            page: easyArray[i + 2],
+                            page: easyArray[i + 2]
                         }
+                        let j = ''
                         if (codexObject.creature === consts.codicesBreakPoint)
                             finishCodices = true
                         if (easyArray[i + 3].toString().charAt(0) === '–') {
                             // console.log('page of: ' + codexObject.page)
                             // console.log('dashed field: ' + easyArray[i + 3])
+                            if (easyArray[i + 3].toString() === '–') {
+                                j = easyArray[i + 3].toString()
+                                i += 1
+                            }
+                            console.log('page of: ' + codexObject.page)
+                            console.log(
+                                'dashed field: ' + j + easyArray[i + 3] + '\n'
+                            )
                             if (/([0-9]|\-)+/g.test(easyArray[i + 3])) {
                                 // console.log('passed first')
                                 codexObject.page = codexObject.page.concat(
+                                    j,
                                     easyArray[i + 3]
                                 )
                                 incrementalObjectIndices += 1

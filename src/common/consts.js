@@ -71,6 +71,16 @@ const emailMeta = 'Sean Carmichael - sean.carimchael2@gmail.com - 267728'
 const codicesBreakPoint = 'Zoog'
 const finalCodicesPage = '397'
 
+const sizes = {
+    Tiny: 'T',
+    Small: 'S',
+    Medium: 'M',
+    Large: 'L',
+    Huge: 'H',
+    Gargantuan: 'G'
+}
+
+module.exports.sizes = sizes
 module.exports.finalCodicesPage = finalCodicesPage
 module.exports.brokenDecodedTextList = brokenDecodedTextList
 module.exports.emailMeta = emailMeta

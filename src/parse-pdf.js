@@ -1,9 +1,10 @@
 const fs = require('fs')
 const path = require('path')
 const PDFParser = require('pdf2json')
-// const figlet = require('figlet');
-// const shell = require('shelljs');
+// const figlet = require('figlet')
+// const shell = require('shelljs')
 const consts = require('./common/consts')
+const moment = require('moment')
 
 const pdfParser = new PDFParser()
 
@@ -12,10 +13,8 @@ pdfParser.on('pdfParser_dataError', (errData) => {
 })
 
 pdfParser.on('pdfParser_dataReady', (pdfData) => {
-    const date = new Date().toLocaleString('en-AU')
-    console.log(`date: ${date}`)
-    const isoDate = new Date(date).toISOString()
-    console.log(`isoDate: ${isoDate}`)
+    const date = moment()
+    const isoDate = date.format()
 
     console.log('Parsed PDF Data')
 
@@ -113,9 +112,9 @@ pdfParser.on('pdfParser_dataReady', (pdfData) => {
 
     // let target = 110;
     // setInterval(() => {
-    //     process.stdout.write('\rTime remaining: ' + target + ' seconds');
-    //     target--;
-    // }, 1000);
+    //     process.stdout.write('\rTime remaining: ' + target + ' seconds')
+    //     target--
+    // }, 1000)
 
     // formImage.Pages
     // foreach(pages.Texts)
