@@ -9,7 +9,9 @@
     "scartest": "node src/scar_test.js",
     "test": "node src/test.js",
     "convertpdf": "node src/parse-pdf.js creature-codex-5e.pdf",
-    "parsecodices": "node src/parse-codices.js"
+    "parsecodices": "node src/parse-codices.js",
+    "populatecodices": "node src/populate-codices.js",
+    "cleancodices": "node src/clean-codices.js"
   },
   "dependencies": {
     "moment": "^2.29.1",

@@ -28,6 +28,49 @@ const codices = [
     'Appendix A: NPC Codex'
 ]
 
+const brokenDecodedTextList = [
+    {
+        brokenEncoding: '%26',
+        fixedEncoding: 'ft',
+        flagElements: 1
+    },
+    {
+        brokenEncoding: '%23',
+        fixedEncoding: 'th',
+        flagElements: 1
+    },
+    {
+        brokenEncoding: '%22',
+        fixedEncoding: 'wh',
+        flagElements: 1
+    },
+    {
+        brokenEncoding: ')',
+        fixedEncoding: 'fl',
+        flagElements: 1
+    },
+    {
+        brokenEncoding: '!',
+        fixedEncoding: 'fi',
+        flagElements: 1
+    },
+    {
+        brokenEncoding: "'",
+        fixedEncoding: 'fi',
+        flagElements: 1
+    },
+    {
+        brokenEncoding: '$',
+        fixedEncoding: 'ff',
+        alternateFixedEncoding: 'Th',
+        flagElements: 1
+    }
+]
+
+const emailMeta = 'Sean Carmichael - sean.carimchael2@gmail.com - 267728'
+const codicesBreakPoint = 'Zoog'
+const finalCodicesPage = '397'
+
 const sizes = {
     Tiny: 'T',
     Small: 'S',
@@ -37,5 +80,9 @@ const sizes = {
     Gargantuan: 'G'
 }
 
-module.exports.codices = codices
 module.exports.sizes = sizes
+module.exports.finalCodicesPage = finalCodicesPage
+module.exports.brokenDecodedTextList = brokenDecodedTextList
+module.exports.emailMeta = emailMeta
+module.exports.codicesBreakPoint = codicesBreakPoint
+module.exports.codices = codices
