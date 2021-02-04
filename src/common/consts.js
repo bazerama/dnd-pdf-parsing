@@ -25,35 +25,46 @@ const codices = [
     'CODEX X',
     'CODEX Y',
     'CODEX Z',
-    'Appendix A: NPC Codex',
+    'Appendix A: NPC Codex'
 ]
 
 const brokenDecodedTextList = [
     {
         brokenEncoding: '%26',
         fixedEncoding: 'ft',
-        flagElements: 1,
+        flagElements: 1
     },
     {
         brokenEncoding: '%23',
         fixedEncoding: 'th',
-        flagElements: 1,
+        flagElements: 1
     },
     {
         brokenEncoding: '%22',
         fixedEncoding: 'wh',
-        flagElements: 1,
+        flagElements: 1
     },
     {
         brokenEncoding: ')',
         fixedEncoding: 'fl',
-        flagElements: 1,
+        flagElements: 1
     },
     {
         brokenEncoding: '!',
         fixedEncoding: 'fi',
-        flagElements: 1,
+        flagElements: 1
     },
+    {
+        brokenEncoding: "'",
+        fixedEncoding: 'fi',
+        flagElements: 1
+    },
+    {
+        brokenEncoding: '$',
+        fixedEncoding: 'ff',
+        alternateFixedEncoding: 'Th',
+        flagElements: 1
+    }
 ]
 
 const emailMeta = 'Sean Carmichael - sean.carimchael2@gmail.com - 267728'

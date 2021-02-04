@@ -13,7 +13,9 @@ pdfParser.on('pdfParser_dataError', (errData) => {
 
 pdfParser.on('pdfParser_dataReady', (pdfData) => {
     const date = new Date().toLocaleString('en-AU')
+    console.log(`date: ${date}`)
     const isoDate = new Date(date).toISOString()
+    console.log(`isoDate: ${isoDate}`)
 
     console.log('Parsed PDF Data')
 
@@ -27,16 +29,19 @@ pdfParser.on('pdfParser_dataReady', (pdfData) => {
             const textString = text['R'][0]['T']
             let decodedText = decodeURIComponent(textString)
             let newText = ''
+            let alternateNewText = ''
             consts.brokenDecodedTextList.forEach((brokenText) => {
                 if (textString === brokenText.brokenEncoding) {
                     decodedText = brokenText.fixedEncoding
                     flagFutureElements += brokenText.flagElements.valueOf()
                     newText = brokenText.fixedEncoding
+                    alternateNewText = brokenText.alternateFixedEncoding
                 }
             })
             if (flagFutureElements === 0) {
                 counter += textArray.push(decodedText)
-            } else if (newText === 'ft' || newText === 'fl') {
+            } else if (newText === 'ameduaodnw') {
+            // } else if (newText === 'ft' || newText === 'fl') {
                 counter--
                 const lastText = textArray.pop()
                 const nextText = texts[textIndex + 1]
@@ -46,7 +51,8 @@ pdfParser.on('pdfParser_dataReady', (pdfData) => {
                 )
                 // console.log(`adding ${fixedText}`)
                 counter += textArray.push(fixedText)
-            } else if (newText === 'th' || newText === 'wh' || newText === 'fi') {
+            } else if (newText === 'ameduaodnw') {
+            // } else if (newText === 'th' || newText === 'wh' || newText === 'fi' || newText === 'ff') {
                 counter--
                 let fixedText = ''
                 const lastText = textArray.pop()
@@ -56,6 +62,8 @@ pdfParser.on('pdfParser_dataReady', (pdfData) => {
                         newText[0].toUpperCase() + newText.substring(1),
                         decodeURIComponent(nextText['R'][0]['T'])
                     )
+                    if (alternateNewText !== undefined)
+                        fixedText = alternateNewText
                 } else if (Number.isInteger(parseInt(lastText))) {
                     counter += textArray.push(lastText)
                     const temp = newText[0].toUpperCase() + newText.substring(1)

@@ -9,7 +9,8 @@
     "test": "node src/test.js",
     "convertpdf": "node src/parse-pdf.js creature-codex-5e.pdf",
     "parsecodices": "node src/parse-codices.js",
-    "populatecodices": "node src/populate-codices.js"
+    "populatecodices": "node src/populate-codices.js",
+    "cleancodices": "node src/clean-codices.js"
   },
   "dependencies": {
     "pdf2json": "^1.2.0"

@@ -46,26 +46,19 @@ const loadFile = (codicesFileName, easyArrayFileName) => {
             let creatureFinished = false
             let addCreatureText = false
             const codexRawTextArray = []
-            console.log(`Dealing with a ${codex.creature}`)
+            // console.log(`Dealing with a ${codex.creature}`)
             while (textIncrementer < easyArray.length && !creatureFinished) {
                 const prevText = easyArray[textIncrementer - 1]
                 const text = easyArray[textIncrementer]
                 // console.log(text)
                 // find creature in question
-                // if (easyArray[textIncrementer] === consts.emailMeta) {
-                //     console.log(`meta: ${easyArray[textIncrementer]}`)
-                //     console.log(`page(text): ${easyArray[textIncrementer + 1]}`)
-                //     console.log(`page(codex): ${codex.page}`)
-                // } else if (easyArray[textIncrementer] === 'Zoog') {
-                //     console.log('ZOOG!')
-                // }
                 if (
                     easyArray[textIncrementer + 1] === consts.emailMeta &&
                     easyArray[textIncrementer + 2] === codex.page
                 ) {
                     // found the creature needed, begin adding creature text
                     addCreatureText = true
-                    console.log(`Adding text for ${codex.creature}`)
+                    // console.log(`Adding text for ${codex.creature}`)
                     textIncrementer += 2 // skips next two garbage texts (meta + page num)
                 } else if (prevText === consts.emailMeta && text === consts.finalCodicesPage) {
                     // console.log(`Stopping last ${easyArray[textIncrementer]}...`)
@@ -82,7 +75,7 @@ const loadFile = (codicesFileName, easyArrayFileName) => {
                 textIncrementer += 1
             }
             if (codexRawTextArray !== []) {
-                console.log(`Adding data for ${codex.creature} to file\n`)
+                // console.log(`Adding data for ${codex.creature} to file\n`)
                 codicesObjects.push(codexRawTextArray)
             }
         })
