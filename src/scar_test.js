@@ -129,5 +129,3 @@ loadFile(
     path.join(__dirname + '/..' + '/resources/json/' + '1-easycodices.json'),
     path.join(__dirname + '/..' + '/resources/json/' + '1-easyarray.json')
 )
-
-
