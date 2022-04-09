@@ -16,7 +16,7 @@
     "cleancodices": "node src/clean-codices.js"
   },
   "dependencies": {
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "pdf2json": "^1.2.0"
   },
   "devDependencies": {
